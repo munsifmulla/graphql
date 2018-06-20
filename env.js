@@ -5,6 +5,6 @@ module.exports = {
 
   url:{
     token_url: 'https://node.licious.in/api/generate_token',
-    pr_list: 'https://node.licious.in/api/catalog/products/all?cat_id=1&hub_id=1&source=mobilesite'
+    pr_list: 'https://node.licious.in/api/catalog/products/all?'
     }
 };

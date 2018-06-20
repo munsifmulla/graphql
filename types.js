@@ -17,22 +17,6 @@ const Token = new GraphQLObjectType({
 
 //Product Lists
 
-const ProductMaster = new GraphQLObjectType({
-  name: 'ProductMaster',
-  fields:()=>({
-    pr_name:{type:GraphQLString},
-    product_id:{type:GraphQLString}
-  })
-})
-
-const ProductMerchandising = new GraphQLObjectType({
-  name: 'ProductMerchandising',
-  fields:()=>({
-    description:{type:GraphQLString},
-    product_id:{type:GraphQLString}
-  })
-})
-
 const ProductList = new GraphQLObjectType({
   name: 'ProductList',
   fields:()=> ({

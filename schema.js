@@ -49,21 +49,28 @@ const RootQuery = new GraphQLObjectType({
 
     productList:{
       type:new GraphQLList(ProductList),
-      resolve(){
+      args:{
+        cat_id: {type: GraphQLString},
+        hub_id: {type: GraphQLInt}
+      },
+      resolve(parentValue, args){
         // return products;
-        return axios.get(env.url.pr_list)
+        return axios.get(env.url.pr_list+`cat_id=${args.cat_id}&hub_id=${args.hub_id}`,
+          {headers:{token:store.get("site_token")}})
           .then((res)=>{
             let resp = [];
-            res.data.data.map((x)=> {
-              let temp = {};
-              Object.assign(temp, x.product_master);
-              Object.assign(temp, x.product_merchantdising);
-              Object.assign(temp, x.product_pricing);
-              Object.assign(temp, x.product_inventory);
-              resp.push(temp)
-            });
-            console.log("\n----------------\n",resp,"\n----------------\n");
-            return resp;
+            console.log("\n----------------\n",res.data,"\n----------------\n");
+            if(res.data.status == "success") {
+              res.data.data.map((x) => {
+                let temp = {};
+                Object.assign(temp, x.product_master);
+                Object.assign(temp, x.product_merchantdising);
+                Object.assign(temp, x.product_pricing);
+                Object.assign(temp, x.product_inventory);
+                resp.push(temp);
+              });
+              return resp;
+            }
           })
       }
     }
